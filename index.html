@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Menna Hany — Developer & Graphic Designer. Portfolio showcasing web development, UI/UX design, brand identity and creative direction." />
+  <title data-i18n="page_title">Menna Hany — Developer &  Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="icon" href="1782129740869.jpg">
+  <style>
+    /* ═══════════════════════════════════════ ROOT VARIABLES ═══ */
+    :root {
+      --bg: #0a0a0a;
+      --bg-soft: #111111;
+      --bg-card: #151515;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.18);
+      --text: #ededed;
+      --text-soft: #a8a8a8;
+      --text-dim: #6a6a6a;
+      --gold: #b8935a;
+      --gold-soft: #d4b683;
+      --silver: #c0c0c0;
+      --accent: #b8935a;
+      --shadow-soft: 0 30px 60px rgba(0,0,0,0.45);
+      --radius: 14px;
+      --ease: cubic-bezier(.2, .8, .2, 1);
+      --transition: 500ms cubic-bezier(.2, .8, .2, 1);
+      --font-en: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-ar: 'Cairo', 'Inter', system-ui, sans-serif;
+      --font-display: 'Playfair Display', 'Cormorant Garamond', serif;
+      --cursor-size: 10px;
+      --follower-size: 36px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { background: var(--bg); color: var(--text); }
+    body {
+      font-family: var(--font-en);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+    body[dir="rtl"] { font-family: var(--font-ar); }
+    body[dir="rtl"] .font-display, body[dir="rtl"] em, body[dir="rtl"] i { font-family: var(--font-ar); font-style: normal; }
+    a, button { font-family: inherit; cursor: none; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: var(--gold); color: #111; }
+
+    /* ═══════════════════════════════════════ CUSTOM CURSOR ═══ */
+    .cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--cursor-size);
+      height: var(--cursor-size);
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+      transition: width 200ms var(--ease), height 200ms var(--ease), background 200ms var(--ease);
+    }
+    .cursor-follower {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--follower-size);
+      height: var(--follower-size);
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 250ms var(--ease), height 250ms var(--ease), border-color 250ms var(--ease), background 250ms var(--ease);
+    }
+    .cursor.hover { width: 22px; height: 22px; background: var(--gold-soft); }
+    .cursor-follower.hover { width: 64px; height: 64px; background: rgba(212, 182, 131, 0.12); border-color: var(--gold-soft); }
+    @media (max-width: 900px) {
+      .cursor, .cursor-follower { display: none; }
+      body, a, button { cursor: auto; }
+    }
+
+    /* ═══════════════════════════════════════ LOADER ═══ */
+    .loader {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      z-index: 9000;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 700ms var(--ease), visibility 700ms;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-inner { text-align: center; }
+    .loader-logo {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease) 0.2s forwards;
+    }
+    .loader-bar {
+      width: 240px; height: 1px;
+      background: var(--line);
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease) 0.5s forwards;
+    }
+    .loader-bar span {
+      position: absolute; inset: 0 100% 0 0;
+      background: var(--gold);
+      animation: loadBar 1.6s var(--ease) forwards;
+    }
+    @keyframes loadBar { from { inset: 0 100% 0 0; } to { inset: 0 0 0 0; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ═══════════════════════════════════════ NAV ═══ */
+    .nav-header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      transition: background 400ms var(--ease), padding 400ms var(--ease), backdrop-filter 400ms var(--ease);
+    }
+    .nav-header.scrolled {
+      background: rgba(10, 10, 10, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 22px;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      text-decoration: none;
+      transition: transform 400ms var(--ease);
+    }
+    .nav-logo:hover { transform: rotate(-4deg) scale(1.05); color: var(--gold-soft); }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+    .nav-link {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 400;
+      position: relative;
+      padding: 6px 0;
+      transition: color 300ms var(--ease);
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 400ms var(--ease);
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-link:hover::after { width: 100%; }
+
+    .btn-translate {
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      transition: all 300ms var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-translate::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--gold);
+      transform: translateY(100%);
+      transition: transform 400ms var(--ease);
+      z-index: -1;
+    }
+    .btn-translate:hover { color: #111; border-color: var(--gold); }
+    .btn-translate:hover::before { transform: translateY(0); }
+    .btn-translate:hover { z-index: 1; }
+
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+    }
+    .nav-toggle span {
+      width: 26px; height: 1px;
+      background: var(--text);
+      transition: transform 300ms var(--ease);
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ═══════════════════════════════════════ CONTAINER ═══ */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .section {
+      padding: 140px 0;
+      position: relative;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      font-weight: 500;
+      position: relative;
+      padding-left: 40px;
+    }
+    body[dir="rtl"] .section-label { padding-left: 0; padding-right: 40px; }
+    .section-label::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0;
+      width: 30px; height: 1px;
+      background: var(--gold);
+    }
+    body[dir="rtl"] .section-label::before { left: auto; right: 0; }
+    .section-label.centered { padding-left: 0; }
+    .section-label.centered::before { display: none; }
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+      color: var(--text);
+    }
+    .section-title em, body[dir="rtl"] .section-title em { font-family: var(--font-display); font-style: italic; color: var(--gold); font-weight: 400; }
+    body[dir="rtl"] .section-title em { font-family: var(--font-ar); font-style: normal; }
+    .section-title.centered, .section-label.centered { text-align: center; }
+
+    /* ═══════════════════════════════════════ BUTTONS ═══ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: all 400ms var(--ease);
+      position: relative;
+      overflow: hidden;
+      border: none;
+    }
+    .btn--primary {
+      background: linear-gradient(var(--gold-soft), var(--gold-soft)) 0 101% / 100% 100% no-repeat, var(--gold);
+      color: #111;
+      z-index: 0;
+      isolation: isolate;
+      transition: transform 400ms var(--ease), box-shadow 400ms var(--ease), background-position 400ms var(--ease);
+    }
+    .btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(184, 147, 90, 0.35);
+      background-position: 0 0, 0 0;
+    }
+    .btn--primary span, .btn--primary i { position: relative; z-index: 1; }
+    .btn--ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line-strong);
+    }
+    .btn--ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(184, 147, 90, 0.05);
+    }
+    .btn--full { width: 100%; justify-content: center; }
+
+    /* ═══════════════════════════════════════ HERO ═══ */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 140px 40px 80px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(184,147,90,0.055), transparent 34%),
+        radial-gradient(circle at 18% 75%, rgba(107,127,163,0.045), transparent 28%);
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      width: 52vw; height: 52vw;
+      min-width: 420px; min-height: 420px;
+      max-width: 760px; max-height: 760px;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(184,147,90,0.10);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 70px rgba(184,147,90,0.018),
+        0 0 0 140px rgba(184,147,90,0.012);
+      animation: heroRing 14s ease-in-out infinite;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: -20%;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.22) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(184,147,90,0.20) 0 1px, transparent 1.5px);
+      background-size: 150px 150px, 220px 220px;
+      background-position: 0 0, 80px 60px;
+      opacity: 0.22;
+      animation: starDrift 26s linear infinite;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 60% at center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at center, black 30%, transparent 80%);
+      animation: gridBreath 10s ease-in-out infinite;
+    }
+    @keyframes heroRing {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.96); opacity: 0.65; }
+      50% { transform: translate(-50%, -50%) scale(1.04); opacity: 1; }
+    }
+    @keyframes starDrift {
+      from { transform: translate3d(0, 0, 0) rotate(0deg); }
+      to { transform: translate3d(45px, -35px, 0) rotate(3deg); }
+    }
+    @keyframes gridBreath {
+      0%, 100% { opacity: 0.65; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.015); }
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: orbFloat 18s ease-in-out infinite;
+    }
+    .hero-orb--1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(184,147,90,0.4), transparent 70%);
+      top: -10%; left: -10%;
+    }
+    .hero-orb--2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(107,127,163,0.35), transparent 70%);
+      bottom: -10%; right: -10%;
+      animation-delay: -9s;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(50px, -40px) scale(1.1); }
+      66% { transform: translate(-30px, 40px) scale(0.95); }
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 36px;
+      font-weight: 500;
+      display: inline-block;
+      padding: 10px 22px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(46px, 9vw, 130px);
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+      color: var(--text);
+    }
+    .hero-title-line {
+      display: block;
+      opacity: 0;
+      transform: translateY(60px);
+      animation: titleUp 1.2s var(--ease) forwards;
+    }
+    .hero-title-line:nth-child(1) { animation-delay: 0.2s; }
+    .hero-title-line:nth-child(2) { animation-delay: 0.4s; }
+    .hero-title-line:nth-child(3) { animation-delay: 0.6s; }
+    .hero-title-line:nth-child(4) { animation-delay: 0.8s; }
+    .hero-title-line.italic { font-style: italic; color: var(--gold); }
+    body[dir="rtl"] .hero-title-line.italic { font-style: normal; }
+    @keyframes titleUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-subtitle {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text-soft);
+      max-width: 620px;
+      margin: 0 auto 50px;
+      opacity: 0;
+      animation: titleUp 1s var(--ease) 1.1s forwards;
+    }
+    .hero-subtitle strong { color: var(--gold); font-weight: 500; }
+    .hero-ctas {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: titleUp 1s var(--ease) 1.3s forwards;
+    }
+    .hero-scroll {
+      top: 92%;
+      left: 47.5%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      z-index: 5;
+      transition: color 300ms ease, transform 300ms ease;
+      position: absolute;
+    }
+    .hero-scroll:hover {
+      color: var(--gold);
+      transform: translateX(-50%) translateY(-3px);
+    }
+    .hero-scroll-line {
+      width: 1px; height: 58px;
+      background: linear-gradient(to bottom, rgba(184,147,90,0.9), rgba(184,147,90,0.08));
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(184,147,90,0.15);
+    }
+    .hero-scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -18px; left: 50%;
+      width: 5px; height: 18px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: var(--gold);
+      box-shadow: 0 0 10px rgba(184,147,90,0.7);
+      animation: scrollDown 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    @keyframes scrollDown {
+      0% { top: -18px; opacity: 0; }
+      15% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { top: 58px; opacity: 0; }
+    }
+
+    /* ═══════════════════════════════════════ ABOUT ═══ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-wrapper {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .about-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 1000ms var(--ease);
+    }
+    .about-img-wrapper:hover .about-img-placeholder { transform: scale(1.05); }
+    .about-img-placeholder::before {
+      content: '';
+      position: absolute; inset: 0;
+  
+    }
+    .about-img-border {
+      position: absolute;
+      top: -15px; left: -15px;
+      right: -30px; bottom: -30px;
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      z-index: -1;
+      opacity: 0.4;
+    }
+    body[dir="rtl"] .about-img-border { left: -30px; right: -15px; }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 30px;
+      padding: 24px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .stat-item {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 36px;
+      color: var(--gold);
+      font-weight: 500;
+      line-height: 1;
+    }
+    .stat-plus { display: none; }
+    .stat-number::after { content: '+'; color: var(--gold); font-family: var(--font-display); }
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+    .about-body p { color: var(--text-soft); line-height: 1.8; font-size: 16px; margin-bottom: 20px; }
+    .about-body strong { color: var(--gold); font-weight: 500; }
+
+    /* ═══════════════════════════════════════ APPROACH ═══ */
+    .approach { background: var(--bg-soft); }
+    .approach-header { text-align: center; max-width: 800px; margin: 0 auto 80px; }
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+    .principle-card {
+      padding: 40px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      text-align: center;
+      transition: all 500ms var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .principle-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 500ms var(--ease);
+    }
+    body[dir="rtl"] .principle-card::before { transform-origin: right; }
+    .principle-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+      background: linear-gradient(to bottom, var(--bg-card), rgba(184,147,90,0.05));
+    }
+    .principle-card:hover::before { transform: scaleX(1); }
+    .principle-icon {
+      width: 60px; height: 60px;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(184,147,90,0.1);
+      color: var(--gold);
+      font-size: 24px;
+      transition: all 400ms var(--ease);
+    }
+    .principle-card:hover .principle-icon {
+      background: var(--gold);
+      color: #111;
+      transform: rotate(360deg);
+    }
+    .principle-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .principle-card p { font-size: 13px; color: var(--text-soft); line-height: 1.6; }
+
+    /* ═══════════════════════════════════════ SERVICES ═══ */
+    .services-list {
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .service-item {
+      display: grid;
+      grid-template-columns: 100px 1fr 80px;
+      gap: 40px;
+      padding: 50px 30px;
+      border-top: 1px solid var(--line);
+      align-items: center;
+      cursor: none;
+      transition: all 500ms var(--ease);
+      position: relative;
+    }
+    .service-item:last-child { border-bottom: 1px solid var(--line); }
+    .service-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 100%;
+      background: linear-gradient(90deg, rgba(184,147,90,0.08), transparent);
+      transition: width 500ms var(--ease);
+      z-index: -1;
+    }
+    body[dir="rtl"] .service-item::before {
+      background: linear-gradient(-90deg, rgba(184,147,90,0.08), transparent);
+    }
+    .service-item:hover::before { width: 100%; }
+    .service-item:hover { padding-left: 50px; }
+    body[dir="rtl"] .service-item:hover { padding-left: 30px; padding-right: 50px; }
+    .service-number {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-style: italic;
+      color: var(--gold);
+      font-weight: 400;
+      transition: transform 500ms var(--ease);
+    }
+    .service-item:hover .service-number { transform: translateX(10px) scale(1.1); }
+    body[dir="rtl"] .service-item:hover .service-number { transform: translateX(-10px) scale(1.1); }
+    .service-body h3 {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .service-body p { color: var(--text-soft); line-height: 1.7; max-width: 700px; font-size: 15px; }
+    .service-icon {
+      width: 60px; height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      color: var(--text);
+      font-size: 22px;
+      transition: all 400ms var(--ease);
+    }
+    .service-item:hover .service-icon {
+      background: var(--gold);
+      color: #111;
+      transform: rotate(15deg) scale(1.1);
+      border-color: var(--gold);
+    }
+
+    /* ═══════════════════════════════════════ SKILLS ═══ */
+    .skills { background: var(--bg-soft); }
+    .skills .section-header { text-align: center; max-width: 800px; margin: 0 auto 80px; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .skill-group {
+      padding: 50px 36px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: all 500ms var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-group:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+    }
+    .skill-group::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(184,147,90,0.15), transparent 70%);
+      border-radius: 50%;
+      transition: all 600ms var(--ease);
+      opacity: 0;
+    }
+    .skill-group:hover::after { opacity: 1; top: -30%; right: -10%; }
+    .skill-group-icon {
+      width: 50px; height: 50px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(184,147,90,0.1);
+      color: var(--gold);
+      font-size: 22px;
+    }
+    .skill-group h3 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    .skill-group ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-group li {
+      font-size: 13px;
+      color: var(--text-soft);
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      transition: all 300ms var(--ease);
+    }
+    .skill-group li:hover {
+      background: rgba(184,147,90,0.1);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ═══════════════════════════════════════ WORK — REDESIGNED ═══ */
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 60px;
+    }
+    .work-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 600ms var(--ease);
+      cursor: none;
+    }
+    .work-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold);
+      box-shadow: var(--shadow-soft);
+    }
+    .work-card-visual {
+      position: relative;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .work-card-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 1200ms var(--ease);
+      filter: brightness(0.85);
+    }
+    .work-card:hover .work-card-img { transform: scale(1.08); filter: brightness(1); }
+    .work-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(10,10,10,0.95) 100%);
+      opacity: 0.7;
+      transition: opacity 500ms var(--ease);
+    }
+    .work-card:hover .work-card-overlay { opacity: 1; }
+    .work-card-number {
+      position: absolute;
+      top: 24px; left: 24px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 28px;
+      color: var(--gold);
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      z-index: 2;
+    }
+    body[dir="rtl"] .work-card-number { left: auto; right: 24px; }
+    .work-card-view {
+      position: absolute;
+      bottom: 24px; right: 24px;
+      padding: 10px 18px;
+      background: var(--gold);
+      color: #111;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-radius: 999px;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 500ms var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 2;
+    }
+    body[dir="rtl"] .work-card-view { right: auto; left: 24px; }
+    .work-card:hover .work-card-view { transform: translateY(0); opacity: 1; }
+    .work-card-content {
+      padding: 32px;
+    }
+    .work-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .work-card-tags span {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(184,147,90,0.1);
+      color: var(--gold);
+      border: 1px solid rgba(184,147,90,0.25);
+      border-radius: 999px;
+      font-weight: 500;
+    }
+    .work-card-content h3 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+    .work-card-summary {
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .work-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 300ms var(--ease);
+      border-bottom: 1px solid var(--line-strong);
+      padding-bottom: 6px;
+    }
+    .work-card-link:hover { color: var(--gold); border-color: var(--gold); gap: 16px; }
+
+    /* ═══════════════════════════════════════ WHY ═══ */
+    .why { background: var(--bg-soft); }
+    .why-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .why-body p {
+      color: var(--text-soft);
+      line-height: 1.8;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .why-body strong { color: var(--gold); font-weight: 500; }
+    .why-tagline {
+      margin-top: 30px;
+      padding: 24px 30px;
+      border-left: 2px solid var(--gold);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--gold);
+    }
+    body[dir="rtl"] .why-tagline { border-left: none; border-right: 2px solid var(--gold); }
+    .why-card {
+      padding: 60px 50px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--gold);
+    }
+    body[dir="rtl"] .why-card::before { left: auto; right: 0; }
+    .why-card-line { display: none; }
+    .why-card-quote {
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1.5;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+    body[dir="rtl"] .why-card-quote { font-style: normal; }
+    .why-card-author { color: var(--gold); font-weight: 500; letter-spacing: 0.1em; }
+
+    /* ═══════════════════════════════════════ CONTACT ═══ */
+    .contact { background: var(--bg); }
+    .contact-header { text-align: center; max-width: 720px; margin: 0 auto 80px; }
+    .contact-sub { color: var(--text-soft); line-height: 1.7; max-width: 600px; margin: 0 auto; font-size: 16px; }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 60px;
+    }
+    .contact-form {
+      padding: 50px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-group { margin-bottom: 22px; }
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 300ms var(--ease);
+      resize: vertical;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(184,147,90,0.04);
+    }
+    .form-success {
+      margin-top: 16px;
+      padding: 14px 20px;
+      background: rgba(184,147,90,0.1);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 8px;
+      font-size: 14px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+    .form-success.show { display: flex; }
+
+    .contact-info-card {
+      padding: 50px 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      position: sticky;
+      top: 100px;
+    }
+    .contact-info-card h3 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .contact-info-card > p { color: var(--text-soft); font-size: 14px; line-height: 1.6; margin-bottom: 30px; }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 14px;
+      border-bottom: 1px solid var(--line);
+      transition: all 300ms var(--ease);
+      letter-spacing: 0.02em;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--line); }
+    .contact-link i {
+      width: 30px;
+      color: var(--gold);
+      font-size: 16px;
+    }
+    .contact-link:hover {
+      color: var(--gold);
+      padding-left: 10px;
+    }
+    body[dir="rtl"] .contact-link:hover { padding-left: 0; padding-right: 10px; }
+    .contact-availability {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: rgba(184,147,90,0.08);
+      border: 1px solid rgba(184,147,90,0.25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--gold);
+    }
+    .availability-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(184,147,90,0.6); }
+      50% { box-shadow: 0 0 0 8px rgba(184,147,90,0); }
+    }
+
+    /* ═══════════════════════════════════════ FOOTER ═══ */
+    .footer {
+      padding: 60px 0 40px;
+      border-top: 1px solid var(--line);
+      background: var(--bg-soft);
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 8px; }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 26px;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .footer-brand p { color: var(--text-soft); font-size: 13px; letter-spacing: 0.1em; }
+    .footer-nav { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+    .footer-nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 300ms var(--ease);
+    }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-copy { text-align: end; color: var(--text-dim); font-size: 12px; }
+    body[dir="rtl"] .footer-copy { text-align: start; }
+
+    /* ═══════════════════════════════════════ SCROLL REVEAL ═══ */
+    .reveal-up, .reveal-left, .reveal-right {
+      opacity: 0;
+      transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+    }
+    .reveal-up { transform: translateY(40px); }
+    .reveal-left { transform: translateX(-40px); }
+    .reveal-right { transform: translateX(40px); }
+    body[dir="rtl"] .reveal-left { transform: translateX(40px); }
+    body[dir="rtl"] .reveal-right { transform: translateX(-40px); }
+    .reveal-up.in, .reveal-left.in, .reveal-right.in { opacity: 1; transform: translate(0, 0); }
+
+    /* ═══════════════════════════════════════ RESPONSIVE ═══ */
+    @media (max-width: 1100px) {
+      .principles-grid { grid-template-columns: repeat(3, 1fr); }
+      .principle-card:nth-child(4), .principle-card:nth-child(5) {
+        grid-column: span 1;
+      }
+      .section { padding: 100px 0; }
+    }
+    @media (max-width: 900px) {
+      .container { padding: 0 24px; }
+      .nav-container { padding: 0 24px; }
+      .nav-links {
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        flex-direction: column;
+        background: rgba(10,10,10,0.96);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 40px;
+        gap: 24px;
+        transform: translateY(-200%);
+        opacity: 0;
+        transition: transform 500ms var(--ease), opacity 500ms var(--ease);
+      }
+      .nav-links.open { transform: translateY(0); opacity: 1; }
+      .nav-toggle { display: flex; }
+      .about-grid, .why-inner, .contact-layout { grid-template-columns: 1fr; gap: 50px; }
+      .work-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .principles-grid { grid-template-columns: repeat(2, 1fr); }
+      .service-item {
+        grid-template-columns: 60px 1fr 50px;
+        gap: 20px;
+        padding: 30px 20px;
+      }
+      .service-number { font-size: 32px; }
+      .service-body h3 { font-size: 22px; }
+      .section-title { font-size: 36px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form, .contact-info-card { padding: 30px 24px; }
+      .footer-inner { grid-template-columns: 1fr; text-align: center; }
+      .footer-copy { text-align: center; }
+      .footer-nav { justify-content: center; }
+      .hero { padding: 120px 20px 80px; }
+      .about-img-border { display: none; }
+    }
+    @media (max-width: 600px) {
+      .principles-grid { grid-template-columns: 1fr; }
+      .work-card-content { padding: 24px; }
+      .work-card-content h3 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ CURSOR ═══ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- ═══════════════════════════════════════════ LOADER ═══ -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">Menna Hany</div>
+      <div class="loader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ NAV ═══ -->
+  <header class="nav-header" id="navbar">
+    <nav class="nav-container">
+      <a href="#hero" class="nav-logo">MH</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" class="nav-link" data-i18n="nav_about">About</a></li>
+        <li><a href="#services" class="nav-link" data-i18n="nav_services">Services</a></li>
+        <li><a href="#skills" class="nav-link" data-i18n="nav_skills">Skills</a></li>
+        <li><a href="#work" class="nav-link" data-i18n="nav_work">Work</a></li>
+        <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <button CLASS="btn-translate" id="lang-toggle" aria-label="Toggle language">AR</button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════ HERO ═══ -->
+    <section class="hero" id="hero">
+      <div class="hero-bg">
+        <div class="hero-grid"></div>
+        <div class="hero-orb hero-orb--1"></div>
+        <div class="hero-orb hero-orb--2"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow" data-i18n="hero_eyebrow">Developer & UI/UX Designer</p>
+        <h1 class="hero-title">
+          <span class="hero-title-line" data-i18n="hero_t1">Designing</span>
+          <span class="hero-title-line italic" data-i18n="hero_t2">with depth.</span>
+          <span class="hero-title-line" data-i18n="hero_t3">Developing</span>
+          <span class="hero-title-line italic" data-i18n="hero_t4">with purpose.</span>
+        </h1>
+        <p class="hero-subtitle">
+          <span data-i18n="hero_sub_a">I am</span> <strong>Menna Hany</strong> — <span data-i18n="hero_sub_b">crafting digital experiences that combine clarity, elegance, and functionality.</span>
+        </p>
+        <div class="hero-ctas">
+          <a href="#work" class="btn btn--primary" data-i18n="hero_cta1">View My Work</a>
+          <a href="#contact" class="btn btn--ghost" data-i18n="hero_cta2">Let's Work Together</a>
+        </div>
+      </div>
+      <a href="#about" class="hero-scroll" id="hero-scroll" aria-label="Scroll to About section">
+        <span data-i18n="hero_scroll">Scroll</span>
+        <div class="hero-scroll-line"></div>
+      </a>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ ABOUT ═══ -->
+    <section class="about section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-visual reveal-up">
+            <div class="about-img-wrapper">
+              <div class="about-img-placeholder"><div class="about-img-placeholder">
+                <img src="myphoto.png">
+              </div>
+              </div>
+              <div class="about-img-border"></div>
+            </div>
+            <div class="about-stats">
+              <div class="stat-item">
+                <span class="stat-number" data-target="7" data-i18n="stat_projects_n">4</span>
+                <span class="stat-label" data-i18n="stat_projects_l">Projects</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" data-target="2" data-i18n="stat_years_n">2</span>
+                <span class="stat-label" data-i18n="stat_years_l">Years Exp.</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" data-target="4" data-i18n="stat_clients_n">4</span>
+                <span class="stat-label" data-i18n="stat_clients_l">Live Projects</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-text">
+            <div class="section-label reveal-up" data-i18n="about_label">About Me</div>
+            <h2 class="section-title reveal-up">
+              <span data-i18n="about_t1">Where</span> <em data-i18n="about_t1_em">creativity</em><br />
+              <span data-i18n="about_t2">meets</span> <em data-i18n="about_t2_em">precision</em>
+            </h2>
+            <div class="about-body reveal-up">
+              <p>
+                <span data-i18n="about_p1_a">I am</span> <strong>Menna Hany</strong><span data-i18n="about_p1_b">, a creative professional working at the intersection of technology and visual design. My work is driven by a deep appreciation for structure, detail, and aesthetic balance.</span>
+              </p>
+              <p data-i18n="about_p2">
+                I do not see design as decoration, nor development as code alone — I see both as tools for building meaningful digital experiences. Whether creating a digital interface, a visual identity, or a branded design solution, I focus on producing work that feels sophisticated, clear, and memorable.
+              </p>
+              <p>
+                <span data-i18n="about_p3_a">My goal is always to create something with value — something that reflects both</span> <strong data-i18n="about_p3_em">beauty and intelligence</strong><span data-i18n="about_p3_b">, giving every project a strong, confident presence.</span>
+              </p>
+            </div>
+            <a href="#contact" class="btn btn--primary reveal-up" data-i18n="about_cta">Work With Me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ APPROACH ═══ -->
+    <section class="approach section" id="approach">
+      <div class="container">
+        <div class="approach-header">
+          <div class="section-label reveal-up" data-i18n="approach_label">My Approach</div>
+          <h2 class="section-title reveal-up">
+            <span data-i18n="approach_title_a">Five principles that</span><br /><em data-i18n="approach_title_em">define my work</em>
+          </h2>
+        </div>
+        <div class="principles-grid">
+          <div class="principle-card reveal-up" data-delay="0">
+            <div class="principle-icon"><i class="fas fa-eye"></i></div>
+            <h3 data-i18n="p1_t">Clarity</h3>
+            <p data-i18n="p1_d">Every message should be unmistakably understood at first glance.</p>
+          </div>
+          <div class="principle-card reveal-up" data-delay="100">
+            <div class="principle-icon"><i class="fas fa-gem"></i></div>
+            <h3 data-i18n="p2_t">Elegance</h3>
+            <p data-i18n="p2_d">Presence that commands attention through refinement, not noise.</p>
+          </div>
+          <div class="principle-card reveal-up" data-delay="200">
+            <div class="principle-icon"><i class="fas fa-crosshairs"></i></div>
+            <h3 data-i18n="p3_t">Precision</h3>
+            <p data-i18n="p3_d">Every detail considered, nothing left to chance in execution.</p>
+          </div>
+          <div class="principle-card reveal-up" data-delay="300">
+            <div class="principle-icon"><i class="fas fa-layer-group"></i></div>
+            <h3 data-i18n="p4_t">Depth</h3>
+            <p data-i18n="p4_d">Concepts that carry meaning beyond the surface aesthetic.</p>
+          </div>
+          <div class="principle-card reveal-up" data-delay="400">
+            <div class="principle-icon"><i class="fas fa-feather-alt"></i></div>
+            <h3 data-i18n="p5_t">Smoothness</h3>
+            <p data-i18n="p5_d">Experiences that flow intuitively and feel effortlessly natural.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ SERVICES ═══ -->
+    <section class="services section" id="services">
+      <div class="container">
+        <div class="section-label reveal-up" data-i18n="services_label">What I Do</div>
+        <h2 class="section-title reveal-up">
+          <span data-i18n="services_title_a">Services built on</span><br /><em data-i18n="services_title_em">vision & craft</em>
+        </h2>
+
+        <div class="services-list">
+          <div class="service-item reveal-up" data-service="01">
+            <div class="service-number">01</div>
+            <div class="service-body">
+              <h3 data-i18n="s1_t">Web Development</h3>
+              <p data-i18n="s1_d">Modern digital experiences with a focus on usability, structure, and visual harmony. Clean, responsive interfaces aligned with the identity of the brand.</p>
+            </div>
+            <div class="service-icon"><i class="fas fa-code"></i></div>
+          </div>
+
+          <div class="service-item reveal-up" data-service="02">
+            <div class="service-number">02</div>
+            <div class="service-body">
+              <h3 data-i18n="s2_t">Graphic Design</h3>
+              <p data-i18n="s2_d">Visual materials that communicate with clarity and impact — from digital content and promotional visuals to branding elements and refined layouts.</p>
+            </div>
+            <div class="service-icon"><i class="fas fa-pen-nib"></i></div>
+          </div>
+
+          <div class="service-item reveal-up" data-service="03">
+            <div class="service-number">03</div>
+            <div class="service-body">
+              <h3 data-i18n="s3_t">Visual Identity</h3>
+              <p data-i18n="s3_d">Cohesive design language crafted through color, typography, composition, and tone — giving each project a distinct personality and professional presence.</p>
+            </div>
+            <div class="service-icon"><i class="fas fa-fingerprint"></i></div>
+          </div>
+
+          <div class="service-item reveal-up" data-service="04">
+            <div class="service-number">04</div>
+            <div class="service-body">
+              <h3 data-i18n="s4_t">Creative Direction</h3>
+              <p data-i18n="s4_d">Approaching every project as a complete story. From concept to final execution, ensuring visual direction, structure, and message all work together meaningfully.</p>
+            </div>
+            <div class="service-icon"><i class="fas fa-compass-drafting"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ SKILLS ═══ -->
+    <section class="skills section" id="skills">
+      <div class="container">
+        <div class="section-label reveal-up centered" data-i18n="skills_label">Skills</div>
+        <h2 class="section-title centered reveal-up">
+          <span data-i18n="skills_title_a">Expertise across</span><br /><em data-i18n="skills_title_em">design & development</em>
+        </h2>
+
+        <div class="skills-grid">
+          <div class="skill-group reveal-up" data-delay="0">
+            <div class="skill-group-icon"><i class="fas fa-terminal"></i></div>
+            <h3 data-i18n="sk1_t">Development</h3>
+            <ul>
+              <li>HTML5</li>
+              <li>CSS3</li>
+              <li>JavaScript</li>
+              <li data-i18n="sk1_4">Responsive Design</li>
+              <li data-i18n="sk1_5">Frontend Development</li>
+              <li data-i18n="sk1_6">UI Implementation</li>
+            </ul>
+          </div>
+
+          <div class="skill-group reveal-up" data-delay="150">
+            <div class="skill-group-icon"><i class="fas fa-palette"></i></div>
+            <h3 data-i18n="sk2_t">Design</h3>
+            <ul>
+              <li data-i18n="sk2_1">Graphic Design</li>
+              <li data-i18n="sk2_2">Brand Identity</li>
+              <li data-i18n="sk2_3">Social Media Design</li>
+              <li data-i18n="sk2_4">Typography</li>
+              <li data-i18n="sk2_5">Color Harmony</li>
+              <li data-i18n="sk2_6">Layout Design</li>
+            </ul>
+          </div>
+
+          <div class="skill-group reveal-up" data-delay="300">
+            <div class="skill-group-icon"><i class="fas fa-star"></i></div>
+            <h3 data-i18n="sk3_t">Creative Strengths</h3>
+            <ul>
+              <li data-i18n="sk3_1">Attention to Detail</li>
+              <li data-i18n="sk3_2">Problem Solving</li>
+              <li data-i18n="sk3_3">Concept Development</li>
+              <li data-i18n="sk3_4">Visual Storytelling</li>
+              <li data-i18n="sk3_5">Modern Aesthetic</li>
+              <li data-i18n="sk3_6">Brand Presence</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ WORK ═══ -->
+    <section class="work section" id="work">
+      <div class="container">
+        <div class="section-label reveal-up" data-i18n="work_label">Selected Work</div>
+        <h2 class="section-title reveal-up">
+          <span data-i18n="work_title_a">Projects crafted with</span><br /><em data-i18n="work_title_em">purpose & depth</em>
+        </h2>
+
+        <div class="work-grid">
+
+          <article class="work-card reveal-up" data-delay="0">
+            <div class="work-card-visual">
+              <img class="work-card-img" src="lingo bloom.png" alt="LingoBloom — Language Learning App" loading="lazy" />
+              <div class="work-card-overlay"></div>
+              <span class="work-card-number">01</span>
+              <a href="https://tikoya800-droid.github.io/lingo-bloom/" target="_blank" rel="noopener" class="work-card-view" data-i18n="view_project">
+                View <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+            <div class="work-card-content">
+              <div class="work-card-tags">
+                <span data-i18n="w1_tag1">Web App</span>
+                <span data-i18n="w1_tag2">Education</span>
+                <span data-i18n="w1_tag3">UI/UX</span>
+              </div>
+              <h3 data-i18n="w1_t">LingoBloom — Language Learning</h3>
+              <p class="work-card-summary" data-i18n="w1_d">
+                Interactive web app that guides learners from absolute beginner (A0) through advanced (C1) across five languages — English, Spanish, Italian, French, and German — with a clean, vibrant interface focused on real conversational progress.
+              </p>
+              <a href="https://tikoya800-droid.github.io/lingo-bloom/" target="_blank" rel="noopener" class="work-card-link">
+                <span data-i18n="view_project_link">View Live Project</span> <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="work-card reveal-up" data-delay="150">
+            <div class="work-card-visual">
+              <img class="work-card-img" src="fitly.jpeg" alt="FITLY — Personalized Nutrition & Fitness" loading="lazy" />
+              <div class="work-card-overlay"></div>
+              <span class="work-card-number">02</span>
+              <a href="https://tikoya800-droid.github.io/fitly/" target="_blank" rel="noopener" class="work-card-view" data-i18n="view_project">
+                View <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+            <div class="work-card-content">
+              <div class="work-card-tags">
+                <span data-i18n="w2_tag1">Full-Stack</span>
+                <span data-i18n="w2_tag2">Health</span>
+                <span data-i18n="w2_tag3">Dashboard</span>
+              </div>
+              <h3 data-i18n="w2_t">FITLY — Personalized Nutrition & Fitness</h3>
+              <p class="work-card-summary" data-i18n="w2_d">
+                AI-powered planner that builds personalized calorie and macro targets around the user's body, goal, and favorite foods (Egyptian & Middle Eastern). Includes guided workouts, progress tracking and an estimate-first, never-claim-medical-advice UX.
+              </p>
+              <a href="https://tikoya800-droid.github.io/fitly/" target="_blank" rel="noopener" class="work-card-link">
+                <span data-i18n="view_project_link">View Live Project</span> <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="work-card reveal-up" data-delay="300">
+            <div class="work-card-visual">
+              <img class="work-card-img" src="onepice.png" alt="One Piece — Handcrafted Jewelry" loading="lazy" />
+              <div class="work-card-overlay"></div>
+              <span class="work-card-number">03</span>
+              <a href="https://one-piece8090.tikoya800.workers.dev/#Special" target="_blank" rel="noopener" class="work-card-view" data-i18n="view_project">
+                View <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+            <div class="work-card-content">
+              <div class="work-card-tags">
+                <span data-i18n="w3_tag1">Branding</span>
+                <span data-i18n="w3_tag2">Visual Identity</span>
+                <span data-i18n="w3_tag3">Web Design</span>
+              </div>
+              <h3 data-i18n="w3_t">One Piece — Handcrafted Jewelry</h3>
+              <p class="work-card-summary" data-i18n="w3_d">
+                Elegant dark-themed storefront and brand identity for a one-of-a-kind jewelry line. Centered on a refined gold logo, soft animations, and a Services-to-Necklaces journey that turns every piece into an emotional purchase.
+              </p>
+              <a href="https://one-piece8090.tikoya800.workers.dev/#Special" target="_blank" rel="noopener" class="work-card-link">
+                <span data-i18n="view_project_link">View Live Project</span> <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="work-card reveal-up" data-delay="450">
+            <div class="work-card-visual">
+              <img class="work-card-img" src="WhatsApp Image 2026-10-04 at 3.42.10 AM.jpeg" alt="Shine Clean — Laundry Management" loading="lazy" />
+              <div class="work-card-overlay"></div>
+              <span class="work-card-number">04</span>
+              <a href="https://tikoya800-droid.github.io/shine-clean/" target="_blank" rel="noopener" class="work-card-view" data-i18n="view_project">
+                View <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+            <div class="work-card-content">
+              <div class="work-card-tags">
+                <span data-i18n="w4_tag1">Web App</span>
+                <span data-i18n="w4_tag2">RTL Arabic</span>
+                <span data-i18n="w4_tag3">Business Tool</span>
+              </div>
+              <h3 data-i18n="w4_t">Shine Clean — Laundry Management System</h3>
+              <p class="work-card-summary" data-i18n="w4_d">
+                A full Arabic-RTL operations dashboard for a laundry service: customer info, services catalogue, billing &amp; deposits, employee check-ins, expenses, salaries and monthly profit — all in one refined dark UI.
+              </p>
+              <a href="https://tikoya800-droid.github.io/shine-clean/" target="_blank" rel="noopener" class="work-card-link">
+                <span data-i18n="view_project_link">View Live Project</span> <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ WHY ═══ -->
+    <section class="why section" id="why">
+      <div class="container">
+        <div class="why-inner">
+          <div class="why-text">
+            <div class="section-label reveal-up" data-i18n="why_label">Why Work With Me</div>
+            <h2 class="section-title reveal-up">
+              <span data-i18n="why_title_a">Vision meets</span><br /><em data-i18n="why_title_em">technical mastery</em>
+            </h2>
+            <div class="why-body reveal-up">
+              <p>
+                <span data-i18n="why_p1_a">Because I bring together</span> <strong data-i18n="why_p1_em">creative vision and technical understanding</strong><span data-i18n="why_p1_b">. I understand how a project should look, how it should function, and how it should feel.</span>
+              </p>
+              <p data-i18n="why_p2">
+                I care deeply about the details because they shape the bigger picture. My goal is always to create work that feels refined, clear, and professionally crafted from every angle.
+              </p>
+              <p>
+                <span data-i18n="why_p3_a">I do not simply build visuals or write code — I create digital outcomes with</span> <strong data-i18n="why_p3_em">identity, purpose, and presence</strong><span data-i18n="why_p3_b">.</span>
+              </p>
+            </div>
+            <div class="why-tagline reveal-up" data-i18n="why_tag">
+              "Elegant by design. Strong by structure."
+            </div>
+          </div>
+
+          <div class="why-visual reveal-up">
+            <div class="why-card">
+              <div class="why-card-line"></div>
+              <p class="why-card-quote" data-i18n="why_quote">
+                "The best work is the kind that leaves an impression without needing to say too much. It feels confident, complete, and carefully made."
+              </p>
+              <div class="why-card-author">— <span data-i18n="why_author">Menna Hany</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ CONTACT ═══ -->
+    <section class="contact section" id="contact">
+      <div class="container">
+        <div class="contact-header">
+          <div class="section-label centered reveal-up" data-i18n="contact_label">Contact</div>
+          <h2 class="section-title centered reveal-up">
+            <span data-i18n="contact_title_a">Let's create something</span><br /><em data-i18n="contact_title_em">memorable</em>
+          </h2>
+          <p class="contact-sub reveal-up" data-i18n="contact_sub">
+            If you are looking for someone who can combine development and design within one clear and refined vision, I would love to be part of your next project.
+          </p>
+        </div>
+
+          <div class="contact-info reveal-up">
+            <div class="contact-info-card">
+              <h3 data-i18n="ci_title">Get in touch</h3>
+              <p data-i18n="ci_desc">Open to freelance projects, collaborations, and full-time opportunities.</p>
+              <div class="contact-links">
+                <a href="mailto:tikoya800@gmail.com" class="contact-link">
+                  <i class="fas fa-envelope"></i>
+                  <span>tikoya800@gmail.com</span>
+                </a>
+                <a href="https://github.com/tikoya800-droid" target="_blank" rel="noopener" class="contact-link">
+                  <i class="fab fa-github"></i>
+                  <span>GitHub</span>
+                </a>
+                <a href="https://www.instagram.com/diva_080_808" target="_blank" rel="noopener" class="contact-link">
+                  <i class="fab fa-instagram"></i>
+                  <span>Instagram</span>
+                </a>
+                <a href="https://www.linkedin.com/in/menna-hany-0971333a7" target="_blank" rel="noopener" class="contact-link">
+                  <i class="fab fa-linkedin-in"></i>
+                  <span>LinkedIn</span>
+                </a>
+              </div>
+              <div class="contact-availability">
+                <span class="availability-dot"></span>
+                <span data-i18n="ci_avail">Available for new projects</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#hero" class="footer-logo">MH</a>
+          <p data-i18n="footer_role">Developer & Graphic Designer</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#about" data-i18n="nav_about">About</a>
+          <a href="#services" data-i18n="nav_services">Services</a>
+          <a href="#work" data-i18n="nav_work">Work</a>
+          <a href="#contact" data-i18n="nav_contact">Contact</a>
+        </nav>
+        <div class="footer-copy">
+          <p>© 2025 <span data-i18n="footer_name">Menna Hany</span>. <span data-i18n="footer_tag">Crafted with elegance & purpose.</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ═══════════════════════════════════════════ I18N STRINGS ═══ */
+    const i18n = {
+      en: {
+        page_title: 'Menna Hany — Developer & Graphic Designer',
+        nav_about: 'About', nav_services: 'Services', nav_skills: 'Skills', nav_work: 'Work', nav_contact: 'Contact',
+        hero_eyebrow: 'Developer & UI/UX Designer',
+        hero_t1: 'Designing', hero_t2: 'with depth.', hero_t3: 'Developing', hero_t4: 'with purpose.',
+        hero_sub_a: 'I am', hero_sub_b: '— crafting digital experiences that combine clarity, elegance, and functionality.',
+        hero_cta1: 'View My Work', hero_cta2: "Let's Work Together", hero_scroll: 'Scroll',
+        stat_projects_l: 'Projects', stat_years_l: 'Years Exp.', stat_clients_l: 'Live Projects',
+        about_label: 'About Me',
+        about_t1: 'Where', about_t1_em: 'creativity', about_t2: 'meets', about_t2_em: 'precision',
+        about_p1_a: 'I am', about_p1_b: ', a creative professional working at the intersection of technology and visual design. My work is driven by a deep appreciation for structure, detail, and aesthetic balance.',
+        about_p2: 'I do not see design as decoration, nor development as code alone — I see both as tools for building meaningful digital experiences. Whether creating a digital interface, a visual identity, or a branded design solution, I focus on producing work that feels sophisticated, clear, and memorable.',
+        about_p3_a: 'My goal is always to create something with value — something that reflects both', about_p3_em: 'beauty and intelligence', about_p3_b: ', giving every project a strong, confident presence.',
+        about_cta: 'Work With Me',
+        approach_label: 'My Approach',
+        approach_title_a: 'Five principles that', approach_title_em: 'define my work',
+        p1_t: 'Clarity', p1_d: 'Every message should be unmistakably understood at first glance.',
+        p2_t: 'Elegance', p2_d: 'Presence that commands attention through refinement, not noise.',
+        p3_t: 'Precision', p3_d: 'Every detail considered, nothing left to chance in execution.',
+        p4_t: 'Depth', p4_d: 'Concepts that carry meaning beyond the surface aesthetic.',
+        p5_t: 'Smoothness', p5_d: 'Experiences that flow intuitively and feel effortlessly natural.',
+        services_label: 'What I Do',
+        services_title_a: 'Services built on', services_title_em: 'vision & craft',
+        s1_t: 'Web Development', s1_d: 'Modern digital experiences with a focus on usability, structure, and visual harmony. Clean, responsive interfaces aligned with the identity of the brand.',
+        s2_t: 'Graphic Design', s2_d: 'Visual materials that communicate with clarity and impact — from digital content and promotional visuals to branding elements and refined layouts.',
+        s3_t: 'Visual Identity', s3_d: 'Cohesive design language crafted through color, typography, composition, and tone — giving each project a distinct personality and professional presence.',
+        s4_t: 'Creative Direction', s4_d: 'Approaching every project as a complete story. From concept to final execution, ensuring visual direction, structure, and message all work together meaningfully.',
+        skills_label: 'Skills',
+        skills_title_a: 'Expertise across', skills_title_em: 'design & development',
+        sk1_t: 'Development', sk1_4: 'Responsive Design', sk1_5: 'Frontend Development', sk1_6: 'UI Implementation',
+        sk2_t: 'Design', sk2_1: 'Graphic Design', sk2_2: 'Brand Identity', sk2_3: 'Social Media Design', sk2_4: 'Typography', sk2_5: 'Color Harmony', sk2_6: 'Layout Design',
+        sk3_t: 'Creative Strengths', sk3_1: 'Attention to Detail', sk3_2: 'Problem Solving', sk3_3: 'Concept Development', sk3_4: 'Visual Storytelling', sk3_5: 'Modern Aesthetic', sk3_6: 'Brand Presence',
+        work_label: 'Selected Work',
+        work_title_a: 'Projects crafted with', work_title_em: 'purpose & depth',
+        view_project: 'View', view_project_link: 'View Live Project',
+        w1_tag1: 'Web App', w1_tag2: 'Education', w1_tag3: 'UI/UX',
+        w1_t: 'LingoBloom — Language Learning',
+        w1_d: 'Interactive web app that guides learners from absolute beginner (A0) through advanced (C1) across five languages — English, Spanish, Italian, French, and German — with a clean, vibrant interface focused on real conversational progress.',
+        w2_tag1: 'Full-Stack', w2_tag2: 'Health', w2_tag3: 'Dashboard',
+        w2_t: 'FITLY — Personalized Nutrition & Fitness',
+        w2_d: 'AI-powered planner that builds personalized calorie and macro targets around the user\'s body, goal, and favorite foods (Egyptian & Middle Eastern). Includes guided workouts, progress tracking and an estimate-first, never-claim-medical-advice UX.',
+        w3_tag1: 'Branding', w3_tag2: 'Visual Identity', w3_tag3: 'Web Design',
+        w3_t: 'One Piece — Handcrafted Jewelry',
+        w3_d: 'Elegant dark-themed storefront and brand identity for a one-of-a-kind jewelry line. Centered on a refined gold logo, soft animations, and a Services-to-Necklaces journey that turns every piece into an emotional purchase.',
+        w4_tag1: 'Web App', w4_tag2: 'RTL Arabic', w4_tag3: 'Business Tool',
+        w4_t: 'Shine Clean — Laundry Management System',
+        w4_d: 'A full Arabic-RTL operations dashboard for a laundry service: customer info, services catalogue, billing & deposits, employee check-ins, expenses, salaries and monthly profit — all in one refined dark UI.',
+        why_label: 'Why Work With Me',
+        why_title_a: 'Vision meets', why_title_em: 'technical mastery',
+        why_p1_a: 'Because I bring together', why_p1_em: 'creative vision and technical understanding', why_p1_b: '. I understand how a project should look, how it should function, and how it should feel.',
+        why_p2: 'I care deeply about the details because they shape the bigger picture. My goal is always to create work that feels refined, clear, and professionally crafted from every angle.',
+        why_p3_a: 'I do not simply build visuals or write code — I create digital outcomes with', why_p3_em: 'identity, purpose, and presence', why_p3_b: '.',
+        why_tag: '"Elegant by design. Strong by structure."',
+        why_quote: '"The best work is the kind that leaves an impression without needing to say too much. It feels confident, complete, and carefully made."',
+        why_author: 'Menna Hany',
+        contact_label: 'Contact',
+        contact_title_a: "Let's create something", contact_title_em: 'memorable',
+        contact_sub: 'If you are looking for someone who can combine development and design within one clear and refined vision, I would love to be part of your next project.',
+        form_name: 'Name', form_email: 'Email', form_subject: 'Subject', form_message: 'Message',
+        form_send: 'Send Message',
+        form_success: "Your message has been sent. I'll be in touch soon.",
+        ci_title: 'Get in touch', ci_desc: 'Open to freelance projects, collaborations, and full-time opportunities.',
+        ci_avail: 'Available for new projects',
+        footer_role: 'Developer & Graphic Designer', footer_name: 'Menna Hany', footer_tag: 'Crafted with elegance & purpose.'
+      },
+      ar: {
+        page_title: 'منة هاني — مطورة ومصممة جرافيك',
+        nav_about: 'نبذة عني', nav_services: 'خدماتي', nav_skills: 'مهاراتي', nav_work: 'أعمالي', nav_contact: 'تواصل',
+        hero_eyebrow: 'مطورة ومصممة ',
+        hero_t1: 'أصمم', hero_t2: 'بعمق.', hero_t3: 'وأبرمج', hero_t4: 'بهدف.',
+        hero_sub_a: 'أنا', hero_sub_b: ' — أصنع تجارب رقمية تمزج بين الوضوح والأناقة والوظيفية.',
+        hero_cta1: ' القي نظرة', hero_cta2: ' تواصل معي ', hero_scroll: 'اسحب ',
+        stat_projects_l: 'مشروع', stat_years_l: 'سنوات خبرة', stat_clients_l: 'عميل',
+        about_label: 'نبذة عني',
+        about_t1: 'عندما', about_t1_em: 'يتقابل', about_t2: 'الإبداع', about_t2_em: ' مع الدقة',
+        about_p1_a: 'أنا', about_p1_b: '، شغوفة بشغلي في تقاطع التكنولوجيا والتصميم البصري. شغلي مبني على تقدير عميق للبنية والتفاصيل والاتزان الجمالي.',
+        about_p2: 'أنا لا اري ان التصميم مجرد ديكور ولا ان البرمجة مجرد كود — أنا اري كلاهما أدوات لبناء تجارب رقمية ذات معنى وقيمه. سواء كان واجهة رقمية، هوية بصرية، سيستم أداري أو حل تصميم متكامل، بتركّز على إنتاج عمل متطور وواضح ويفضل في الذاكرة.',
+        about_p3_a: 'هدفي دايمًا إني أعمل حاجة ليها قيمة — حاجة تعكس', about_p3_em: 'الجمال والذكاء', about_p3_b: '، ويعطي كل مشروع حضور قوي وواثق.',
+        about_cta: ' لنعمل معا ',
+        approach_label: 'نهجي',
+        approach_title_a: 'خمس مبادئ', approach_title_em: 'بتحدد شغلي',
+        p1_t: 'الوضوح', p1_d: 'كل رسالة لازم تتفهم من أول نظرة بدون أي غموض.',
+        p2_t: 'الأناقة', p2_d: 'حضور بيلفت الانظار من خلال الرقي، مش الضوضاء.',
+        p3_t: 'الدقة', p3_d: 'كل تفصيلة محسوبة، ومفيش حاجة سيبتها للصدفة في التنفيذ.',
+        p4_t: 'العمق', p4_d: 'أفكار بتحمل معنى أبعد من الشكل السطحي.',
+        p5_t: 'السلاسة', p5_d: 'تجارب بتجري بشكل طبيعي وبتحسسك إنها سهلة بدون مجهود.',
+        services_label: 'اقدر اقدملك ايه ',
+        services_title_a: 'خدمات مبنية على', services_title_em: 'رؤية وإتقان',
+        s1_t: 'تطوير الويب', s1_d: 'تجارب رقمية حديثة بتركز على سهولة الاستخدام والبنية والانسجام البصري. واجهات نظيفة ومتجاوبة متناسقة مع هوية البراند.',
+        s2_t: 'التصميم الجرافيكي', s2_d: 'مواد بصرية بتتكلم بوضوح وقوة — من المحتوى الرقمي والمرئيات الترويجية لهوية البراند والـ layouts الراقية.',
+        s3_t: 'الهوية البصرية', s3_d: 'لغة تصميم متجانسة مبنية من اللون، الخطوط، التكوين، والنبرة — بتدي كل مشروع شخصية مميزة وحضور احترافي.',
+        s4_t: 'الإخراج الإبداعي', s4_d: 'معالجة كل مشروع كقصة كاملة. من الفكرة للتنفيذ النهائي، ضمان إن الاتجاه البصري والبنية والرسالة كلها بتشتغل مع بعض بشكل متناغم.',
+        skills_label: 'مهاراتي',
+        skills_title_a: 'خبرتي في', skills_title_em: 'التصميم والتطوير',
+        sk1_t: 'التطوير', sk1_4: 'تصميم متجاوب', sk1_5: 'تطوير الواجهات', sk1_6: 'تنفيذ الـ UI',
+        sk2_t: 'التصميم', sk2_1: 'تصميم جرافيكي', sk2_2: 'هوية البراند', sk2_3: 'تصميم سوشيال ميديا', sk2_4: 'الطباعة (Typography)', sk2_5: 'انسجام الألوان', sk2_6: 'تصميم الـ Layout',
+        sk3_t: 'نقاط القوة الإبداعية', sk3_1: 'الاهتمام بالتفاصيل', sk3_2: 'حل المشكلات', sk3_3: 'تطوير الأفكار', sk3_4: 'السرد البصري', sk3_5: 'التفكير الجمالي الحديث', sk3_6: 'حضور البراند',
+        work_label: 'أعمال مختارة',
+        work_title_a: 'مشاريع مصنوعة بـ', work_title_em: 'هدف وعمق',
+        view_project: 'زيارة', view_project_link: 'شوف المشروع لايف',
+        w1_tag1: 'ويب أب', w1_tag2: 'تعليم', w1_tag3: 'UI/UX',
+        w1_t: 'LingoBloom — تعلّم لغات',
+        w1_d: 'تطبيق ويب تفاعلي بياخد المتعلم من المبتدئ تمامًا (A0) لحد المستوى المتقدم (C1) في خمس لغات — إنجليزي، إسباني، إيطالي، فرنسي، وألماني — بواجهة نظيفة ونابضة بالحياة بتركز على تقدم حقيقي في المحادثات.',
+        w2_tag1: 'فل ستاك', w2_tag2: 'صحة', w2_tag3: 'لوحة تحكم',
+        w2_t: 'FITLY — تغذية ولياقة شخصية',
+        w2_d: 'مخطط ذكي بيحسب أهداف السعرات والمغذيات بناءً على جسمك وهدفك وأكلاتك المفضلة (مصرية وشرق أوسطية). فيه تمارين موجهة، تتبّع للتقدم، وتجربة بتقول إنها تقديرات ومش نصائح طبية.',
+        w3_tag1: 'براندينج', w3_tag2: 'هوية بصرية', w3_tag3: 'تصميم ويب',
+        w3_t: 'One Piece — مجوهرات مصنوعة يدويًا',
+        w3_d: 'متجر إلكتروني أنيق بهوية بصرية لخط مجوهرات فريد من نوعه. مبني على لوجو ذهبي راقي، أنيميشن ناعمة، ورحلة من الخدمات للقلائد بتخلي كل قطعة تجربة عاطفية.',
+        w4_tag1: 'ويب أب', w4_tag2: 'عربي RTL', w4_tag3: 'أداة بيزنس',
+        w4_t: 'Shine Clean — نظام إدارة المغسلة',
+        w4_d: 'لوحة عمليات كاملة بالعربي RTL لخدمة مغسلة: بيانات العميل، كاتالوج الخدمات، الفواتير والعربون، حضور الموظفين، المصروفات، المرتبات، والربح الشهري — كله في واجهة داكنة واحدة عملية.',
+        why_label: 'ليه تشتغل معايا',
+        why_title_a: 'الرؤية بتقابل', why_title_em: 'الإتقان التقني',
+        why_p1_a: 'لأني بجمع بين', why_p1_em: 'الرؤية الإبداعية والفهم التقني', why_p1_b: '. بفهم المشروع  يشتغل إزاي، ويبان إزاي.',
+        why_p2: 'بهتم جدا بالتفاصيل لأنها اللي بتصنع الصورة الكاملة. هدفي دايمًا إني أعمل عمل متطور وواضح ومصنوع بشكل احترافي من كل الزوايا.',
+        why_p3_a: 'مش بس بعمل تصميم حلو ولا بكتب كود عبقري — أنا بعمل نتائج رقمية فيها', why_p3_em: 'هوية وهدف وحضور', why_p3_b: '.',
+        why_tag: '"أنيق بالتصميم. قوي بالبنية."',
+        why_quote: '"أحسن شغل هو اللي بيفضل في الذاكرة من غير ما يحتاج كلام كتير. وبيحسسك إنه واثق ومكتمل ومصنوع بعناية."',
+        why_author: 'menna hany ',
+        contact_label: 'تواصل معي',
+        contact_title_a: 'لنصنع شيئاً ', contact_title_em: '  لا يُنسى',
+        contact_sub: 'لو بتدور على حد يقدر يجمع بين التطوير والتصميم وتشوف فعلا فرق في البزنس بتاعك، يجب ان أكون جزء من مشروعك القادم.',
+        form_name: 'الاسم', form_email: 'الإيميل', form_subject: 'الموضوع', form_message: 'الرسالة',
+        form_send: ' إرسال',
+        form_success: 'رسالتك وصلت! هرجعلك قريب.',
+        ci_title: 'راسلني', ci_desc: 'متاحة لمشاريع الفريلانس والتعاون والفرص بدوام عن بعد.',
+        ci_avail: 'متاحة الان ',
+        footer_role: 'مطورة ومصممة ', footer_name: 'منة هاني', footer_tag: 'مصنوعة بأناقة وبهدف.'
+      }
+    };
+
+    /* ═══════════════════════════════════════════ LANGUAGE TOGGLE ═══ */
+    let currentLang = localStorage.getItem('mh-lang') || 'en';
+
+    function applyLanguage(lang) {
+      const dict = i18n[lang];
+      if (!dict) return;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] != null) el.textContent = dict[key];
+      });
+      if (lang === 'ar') {
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+        document.body.dir = 'rtl';
+        document.title = dict.page_title;
+      } else {
+        document.documentElement.lang = 'en';
+        document.documentElement.dir = 'ltr';
+        document.body.dir = 'ltr';
+        document.title = dict.page_title;
+      }
+      document.getElementById('lang-toggle').textContent = lang === 'ar' ? 'EN' : 'AR';
+      localStorage.setItem('mh-lang', lang);
+      currentLang = lang;
+    }
+
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+      applyLanguage(currentLang === 'ar' ? 'en' : 'ar');
+    });
+
+    /* ═══════════════════════════════════════════ LOADER ═══ */
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1500);
+    });
+
+    /* ═══════════════════════════════════════════ CURSOR ═══ */
+    const cursor = document.getElementById('cursor');
+    const follower = document.getElementById('cursor-follower');
+    let mouseX = 0, mouseY = 0;
+    let cx = 0, cy = 0;
+    let fx = 0, fy = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+    function animateFollower() {
+      fx += (mouseX - fx) * 0.12;
+      fy += (mouseY - fy) * 0.12;
+      follower.style.left = fx + 'px';
+      follower.style.top = fy + 'px';
+      requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+    document.querySelectorAll('a, button, .work-card, .service-item, .skill-group, .principle-card, .contact-link').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); follower.classList.add('hover'); });
+      el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); follower.classList.remove('hover'); });
+    });
+
+    /* ═══════════════════════════════════════════ NAV SCROLL ═══ */
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    /* ═══════════════════════════════════════════ NAV TOGGLE ═══ */
+    document.getElementById('nav-toggle').addEventListener('click', () => {
+      document.getElementById('nav-toggle').classList.toggle('open');
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      document.getElementById('nav-toggle').classList.remove('open');
+      document.getElementById('nav-links').classList.remove('open');
+    }));
+
+    /* ═══════════════════════════════════════════ SCROLL REVEAL ═══ */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute('data-delay') || '0');
+          setTimeout(() => entry.target.classList.add('in'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    /* ═══════════════════════════════════════════ STATS COUNTER ═══ */
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('.stat-number');
+          counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target') || counter.textContent);
+            const duration = 1800;
+            const start = performance.now();
+            function tick(now) {
+              const progress = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              counter.textContent = Math.floor(eased * target);
+              if (progress < 1) requestAnimationFrame(tick);
+              else counter.textContent = target;
+            }
+            requestAnimationFrame(tick);
+          });
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    const statsEl = document.querySelector('.about-stats');
+    if (statsEl) statObserver.observe(statsEl);
+
+    /* ═══════════════════════════════════════════ CONTACT FORM ═══ */
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      const form = e.target;
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if (!name || !email || !message) return;
+
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.innerHTML = '<span>Sending...</span>';
+
+      // FormSubmit receives the form data and emails it to tikoya800@gmail.com.
+      // Do not preventDefault: the browser must submit the form to FormSubmit.
+    });
+
+    /* ═══════════════════════════════════════════ PARALLAX ORBS ═══ */
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      document.querySelectorAll('.hero-orb').forEach((orb, i) => {
+        const speed = (i + 1) * 0.04;
+        orb.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    });
+
+    /* ═══════════════════════════════════════════ INIT LANGUAGE ═══ */
+    applyLanguage(currentLang);
+  </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
